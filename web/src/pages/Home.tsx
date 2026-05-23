@@ -10,11 +10,11 @@ type Props = {
   onSettings: () => void;
 };
 
-function formatMs(value: number): string {
-  if (value < 0) return "—";
-  // Czech thousands separator = thin space
-  return value.toLocaleString("cs-CZ").replace(/ /g, " ");
+function formatSeconds(ms: number): string {
+  if (ms < 0) return "—";
+  return (ms / 1000).toFixed(3);
 }
+
 
 export function Home({ device, onSettings }: Props) {
   const [pendingCmd, setPendingCmd] = useState<string | null>(null);
@@ -67,10 +67,10 @@ export function Home({ device, onSettings }: Props) {
       : "POSLEDNÍ ČAS";
 
   const numberText = pendingCmd
-    ? "— — —"
+    ? "—.———"
     : !hasResult
       ? "—"
-      : formatMs(lastMs!);
+      : formatSeconds(lastMs!);
 
   const numberKey = pendingCmd ?? `${lastMs}-${lastCmdId}`;
 
@@ -104,7 +104,7 @@ export function Home({ device, onSettings }: Props) {
           </motion.div>
         </div>
         <div className={`result__unit ${pendingCmd ? "result__unit--dim" : ""}`}>
-          MS
+          S
         </div>
         <div
           className={`ruler ${pendingCmd ? "ruler--active" : ""}`}
