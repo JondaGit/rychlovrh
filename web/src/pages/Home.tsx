@@ -12,7 +12,7 @@ type Props = {
 
 function formatSeconds(ms: number): string {
   if (ms < 0) return "—";
-  return (ms / 1000).toFixed(3);
+  return (ms / 1000).toFixed(3).replace(".", ",");
 }
 
 
@@ -67,7 +67,7 @@ export function Home({ device, onSettings }: Props) {
       : "POSLEDNÍ ČAS";
 
   const numberText = pendingCmd
-    ? "—.———"
+    ? "—,———"
     : !hasResult
       ? "—"
       : formatSeconds(lastMs!);
