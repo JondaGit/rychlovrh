@@ -67,7 +67,7 @@ export function Home({ device, onSettings }: Props) {
       : "POSLEDNÍ ČAS";
 
   const numberText = pendingCmd
-    ? "—,———"
+    ? "———"
     : !hasResult
       ? "—"
       : formatSeconds(lastMs!);
